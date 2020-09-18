@@ -8,5 +8,4 @@ class PhysObj:
         """Calculate the collision with another object"""
         pass
 
-    def calculate_momentum(self, mass, velocity):
-        return mass*velocity
+    
