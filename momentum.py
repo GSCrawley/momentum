@@ -11,7 +11,7 @@ class PhysObj:
         """Dunder to output information on the object"""
         return f'''Object {self.id}:
         Mass: {self.mass}
-        Velocity: {self.vel}\n'''
+        Velocity after collision: {self.vel}\n'''
 
     def collide(self, obj2):
         """Calculate the collision with another object"""
