@@ -14,30 +14,25 @@ class PhysObj:
         """Dunder to output information on the object"""
         return f'''Object {self.id}:
         Mass: {self.mass}
-        Velocity after collision: {self.vel}\n'''
+        Velocity after collision: {self.velF}\n
+        momentum after collision: {self.momentumFinal}'''
 
     def collide(self, obj2):
         """Calculate the elastic collision with another object, assume object 2 travels in opposite direction"""
-        # Pf = Pi
+        # Pi = Pf => m1V1i + m2V2i = m1V1f + m2V2f
+        pi = self.momentumInital + obj2.momentumInital
 
-        #V1f + V1i = V2i + V2f 
-        self.velfF = (self.mass-obj2.mass)/(self.mass+obj2.mass)
-        self.velF = self.velF*self.velI
+        #V1f + V1i = V2i + V2f => V1f = V2f + (V2i-V1i)
+        initials = obj2.velI - self.velI
+        #V2f = Pi-m1(initals)/(m1+m2)
+        obj2.velF = (pi-self.mass*initials)/(self.mass+obj2.mass)
 
-        obj2.velF = self.velF + self.velI - obj2.velI
+        #V1f = V2f + (V2i-V1i)
+        self.velF = obj2.velF + initials
 
         obj2.momentumFinal = self._calculate_momentum(obj2.mass, obj2.velF)
         self.momentumFinal = self._calculate_momentum(self.mass, self.velF)
 
-        # if self.vel > obj2.vel:
-        #     # a = F/m
-        #     self.vel -= total_force / self.mass
-        #     obj2.vel += total_force / obj2.mass
-        # elif self.vel < obj2.vel:
-        #     self.vel += total_force / self.mass
-        #     obj2.vel -= total_force / obj2.mass
-        # else:
-        #     print("No collision")
 
     def _calculate_momentum(self, mass, vel):
         """Helper function to determine momentum"""
@@ -49,6 +44,7 @@ if __name__ == '__main__':
     mass1_input = input("Enter your first object's mass (kg): ")
     vel1_input = input("Enter your first object's velocity (m/s): ")
 
+    #make sure you make the  velocity negative as we assume object is traveling opposite to object 1
     mass2_input = input("Enter your second object's mass (kg): ")
     vel2_input = input("Enter your second object's velocity (m/s): ")
 
