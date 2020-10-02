@@ -14,15 +14,11 @@ class PhysObj:
         """Dunder to output information on the object"""
         return f'''Object {self.id}:
         Mass: {self.mass}
-        Inital Velocity: {self.velI}\n
-        Final Velocity: {self.velF}'''
+        Velocity after collision: {self.vel}\n'''
 
     def collide(self, obj2):
         """Calculate the elastic collision with another object, assume object 2 travels in opposite direction"""
         # Pf = Pi
-
-        # Pi
-        inital = self.momentumInital + (-1*obj2.momentumInitial)
 
         #V1f + V1i = V2i + V2f 
         self.velfF = (self.mass-obj2.mass)/(self.mass+obj2.mass)
