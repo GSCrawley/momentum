@@ -14,7 +14,7 @@ class PhysObj:
         """Dunder to output information on the object"""
         return f'''Object {self.id}:
         Mass: {self.mass}
-        Velocity after collision: {self.velF}\n
+        Velocity after collision: {self.velF}gi
         momentum after collision: {self.momentumFinal}'''
 
     def collide(self, obj2):
@@ -53,5 +53,5 @@ if __name__ == '__main__':
 
     obj1.collide(obj2)
 
-    print(obj1)
-    print(obj2)
+    print(obj1.__str__())
+    print(obj2.__str__())
